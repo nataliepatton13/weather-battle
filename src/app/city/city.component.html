@@ -1,0 +1,15 @@
+<!--<input class="input"
+type="text"
+[(ngModel)]="autocompleteInput"
+#addresstext style="padding: 12px 20px; border: 1px solid #ccc; width: 400px"
+>-->
+<form>
+  <mat-form-field>
+    <input matInput [placeholder]="'Enter ' + (optionNumber === '1' ? 'First ' : 'Second ') + 'City'"
+    matGoogleMapsAutocomplete [autoCompleteOptions]="autoCompleteOptions"
+    (onAutocompleteSelected)="onAutocompleteSelected($event)" [formControl]="cityFormControl">
+    <mat-error *ngIf="cityFormControl.hasError('wrongFormat')">
+      Please select a city from the dropdown list
+    </mat-error>
+  </mat-form-field>
+</form>

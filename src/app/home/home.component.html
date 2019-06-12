@@ -1,0 +1,33 @@
+<div class="container" fxLayout="column">
+  <div *ngIf="!submitted " fxLayout="column" fxFlex [@enterAnimation]>
+    <div class="header" fxLayout="row" fxLayoutAlign="center center" fxFlex="30">
+      <div class="logo"></div>
+      <div class="title mat-display-1" fxLayout="column" fxLayoutAlign="center">
+        <div class="title-text">Weather</div>
+        <div class="title-text sub">Battle</div>
+      </div>
+    </div>
+    <div fxFlex="grow" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <app-city #city1 optionNumber="1"></app-city>
+      <app-city #city2 optionNumber="2"></app-city>
+      <form>
+        <mat-form-field>
+          <mat-label>Forecast Period</mat-label>
+          <mat-select [(ngModel)]="selectedForecastPeriod" name="numForecastDays">
+            <mat-option *ngFor="let option of forecastPeriodOptions" [value]="option.value">
+              {{option.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button color="primary" (click)="compareForecasts()">Compare Forecasts</button>
+    </div>
+    <div *ngIf="!error" fxFlex="grow" fxLayoutAlign="center center" fxLayout="column">
+      <div class="mat-h2">Instructions</div>
+      <div class="mat-body instructions">Select two cities and the amount of time that you would like to compare the forecasts for and press the Compare Forecast
+        button to see which city is predicted to have the better weather.</div>
+    </div>
+  </div>
+  <div *ngIf="error" class="mat-body">There was an error processing your request. Please try again.</div>
+  <app-result *ngIf="winnerChosen" [city1]="city1" [city2]="city2" (reset)="reset()"></app-result>
+</div>

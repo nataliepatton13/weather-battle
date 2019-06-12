@@ -1,0 +1,34 @@
+<div class="result-container" [ngClass]="{'winner': animationOver}" fxLayout="column" fxLayoutAlign="start center">
+  <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center" class="header">
+    <div class="scale-in-center mat-display-1">THE WINNER IS</div>
+    <div class="appear-1 mat-display-1">.</div>
+    <div class="appear-2 mat-display-1">.</div>
+    <div class="appear-3 mat-display-1">.</div>
+  </div>
+  <div fxFlex="60" fxLayout="column" fxLayoutAlign="start center" class="vibrate-1" fxLayoutGap="40px">
+    <div *ngIf="!animationOver || city1.winner" [@enterAnimation] class="mat-display-1 city" [ngClass]="{'winner-left': city1.winner, 'loser-left': !city1.winner}">{{city1.cityInfo.cityName}}</div>
+    <div *ngIf="!animationOver" [@enterAnimation] class="mat-display-1 versus">VS</div>
+    <div *ngIf="!animationOver || city2.winner" [@enterAnimation] class="mat-display-1 city" [ngClass]="{'winner-right': city2.winner, 'loser-right': !city2.winner}">{{city2.cityInfo.cityName}}</div>
+
+  </div>
+  <div *ngIf="animationOver" [@enterAnimation] fxFlex="25" fxLayoutGap="10px" class="results" fxLayout="column">
+    <div fxLayoutAlign="center center">
+      <span class="mat-h2">{{winnerName + '\'s' + ' Weather Forecast:'}}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span fxFlex="70" class="mat-body">Average Temperature: </span>
+      <span fxFlex="20" class="mat-body">{{winnerTemp}} </span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span fxFlex="70" class="mat-body"> Total Precipitation: </span>
+      <span fxFlex="20" class="mat-body">{{winnerPrecip}} </span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span fxFlex="70"  class="mat-body">Maximum Wind Speed: </span>
+      <span fxFlex="20" class="mat-body">{{winnerWind}} </span>
+    </div>
+  </div>
+  <div fxFlex="20">
+    <button *ngIf="animationOver" [@enterAnimation] mat-raised-button color="primary" (click)="playAgain()">Play Again!</button>
+  </div>
+</div>
